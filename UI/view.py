@@ -15,7 +15,9 @@ class View(ft.UserControl):
         self._title = None
 
         self.ddyear = None
+        self.ddyearValue = None
         self.ddcountry = None
+        self.ddcountryValue = None
         self.txtN = None
 
         self.btn_graph = None
@@ -34,8 +36,8 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         #ROW with some controls
-        self.ddyear = ft.Dropdown(label="Anno")
-        self.ddcountry= ft.Dropdown(label="Nazione")
+        self.ddyear = ft.Dropdown(label="Anno", on_change=self.on_dropdownYear_change)
+        self.ddcountry= ft.Dropdown(label="Nazione", on_change=self.on_dropdownCountry_change)
 
         self.btn_graph = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handle_graph)
 
@@ -89,3 +91,11 @@ class View(ft.UserControl):
 
     def update_page(self):
         self._page.update()
+
+    def on_dropdownYear_change(self, e):
+        self.ddyearValue = self.ddyear.value
+        self.update_page()
+
+    def on_dropdownCountry_change(self, e):
+        self.ddcountryValue = self.ddcountry.value
+        self.update_page()
