@@ -1,6 +1,5 @@
 import flet as ft
-
-
+from model.volume import Volume
 class Controller:
     def __init__(self, view, model):
         # the view, with the graphical elements of the UI
@@ -36,7 +35,11 @@ class Controller:
 
 
     def handle_volume(self, e):
-        pass
+        listVolumeCO = self._model.calculateVolume()
+        for volume in listVolumeCO:
+            self.view.txtOut2.controls.append(
+                ft.Text(f"{volume.node.Retailer_name} ---> {volume.volume}"))
+
 
 
     def handle_path(self, e):
