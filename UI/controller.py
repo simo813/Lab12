@@ -46,4 +46,27 @@ class Controller:
 
 
     def handle_path(self, e):
-        pass
+        self.view.txtOut3.clean()
+        graph = self._model.graphMO
+        length = int(self.view.txtN.value)
+        optPath, optPathWeight= self._model.getOptPath(length)
+        self.view.txtOut3.controls.append(
+            ft.Text(f"Peso cammino massimo: {optPathWeight}"))
+        for i in range(0, len(optPath)-1):
+            retailer1 = optPath[i]
+            retailer2 = optPath[i + 1]
+            weight = graph.get_edge_data(retailer1, retailer2).get('weight', 1)
+            self.view.txtOut3.controls.append(
+                ft.Text(f"{retailer1.Retailer_name} ---> {retailer2.Retailer_name}: {weight}"))
+        self.view.update_page()
+
+
+
+
+
+
+
+
+
+
+

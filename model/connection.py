@@ -9,3 +9,4 @@ class Connection:
     retailer1: Retailer
     retailer2: Retailer
     weight: int
+
