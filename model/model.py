@@ -33,6 +33,7 @@ class Model:
             for source, successor, data in self.graphMO.edges(node, data=True):
                 volumeNode.volume += data['weight']
             listVolume.append(volumeNode)
+        listVolume = sorted(listVolume, key = lambda v: v.volume, reverse=True)
         return listVolume
 
 

@@ -1,6 +1,7 @@
 from database.DB_connect import DBConnect
 from model.connection import Connection
 from model.retailer import Retailer
+from model.volume import Volume
 
 
 class DAO():
@@ -82,6 +83,30 @@ class DAO():
             row = cursor.fetchone()
 
             result = Connection(retailer1.Retailer_code, retailer2.Retailer_code, row["weight"]) if row else 0
+
+        except Exception as e:
+            print(f"Error fetching: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                conn.close()
+        return result
+
+    @staticmethod
+    def getVolume(retailer, year, nation):
+        result = None
+        try:
+            conn = DBConnect.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            query = """ 
+
+                        
+                       """
+            cursor.execute(query, (retailer.Retailer_code, year, nation))
+            row = cursor.fetchone()
+
+            result = Volume(retailer, row["volume"]) if row else 0
 
         except Exception as e:
             print(f"Error fetching: {e}")

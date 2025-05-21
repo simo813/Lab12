@@ -23,6 +23,7 @@ class Controller:
 
 
     def handle_graph(self, e):
+        self.view.txt_result.clean()
         self._model.createGraph(self.view.ddcountryValue, self.view.ddyearValue)
         graph = self._model.graphMO
         nNodes = graph.number_of_nodes()
@@ -35,10 +36,12 @@ class Controller:
 
 
     def handle_volume(self, e):
+        self.view.txtOut2.clean()
         listVolumeCO = self._model.calculateVolume()
         for volume in listVolumeCO:
             self.view.txtOut2.controls.append(
                 ft.Text(f"{volume.node.Retailer_name} ---> {volume.volume}"))
+        self.view.update_page()
 
 
 
